@@ -1,0 +1,14 @@
+Create table books(
+    _id varchar(255) not null unique PRIMARY KEY,
+    title varchar (255)not null,
+    authors varchar (255)not null,
+    description varchar(255),
+    isbn varchar (255) not null,
+    publishing_company varchar (255),
+    languages varchar (255) not null,
+    page_count integer not null
+ 
+);
+
+
+SELECT * FROM books;
