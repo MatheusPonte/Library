@@ -1,5 +1,5 @@
 require('express-async-errors')
-const app = require('./routes/server.ts');
+const app = require('./routes/routes.ts');
 const port: number = 8080;
 
 app.listen(port,()=>{
