@@ -6,4 +6,6 @@ const booksController = new BooksController();
 
 route.get('/getAllBooks', booksController.listBooks);
 
+route.post('/createBook', booksController.createBooks);
+
 module.exports = route;
