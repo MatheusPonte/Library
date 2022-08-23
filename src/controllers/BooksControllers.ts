@@ -1,19 +1,19 @@
 const BooksService = require('../services/BookServices');
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 
 const booksService = new BooksService();
 
-class BooksController{
-    async listBooks(req: Request, res: Response){
-        try{
-        const books = await booksService.listBooks();
-        return res.status(200).send(books);
-    }catch(err){
-        return res.status(500).send({error: err})
-    }
+class BooksController {
+    async listBooks(req: Request, res: Response) {
+        try {
+            const books = await booksService.listBooks();
+            return res.status(200).send(books);
+        } catch (err) {
+            return res.status(500).send({ error: err })
+        }
     }
 
-    async createBooks (req: Request, res: Response){
+    async createBooks(req: Request, res: Response) {
         const {
             title,
             authors,
@@ -22,9 +22,9 @@ class BooksController{
             publishing_company,
             languages,
             page_count,
-        }= req.body;
-        
-        try{
+        } = req.body;
+
+        try {
             const books = await booksService.createBooks(
                 title,
                 authors,
@@ -33,15 +33,60 @@ class BooksController{
                 publishing_company,
                 languages,
                 page_count,
-            ); 
+            );
             return res.status(200).send(books);
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
-            return res.status(500).send({error: err})
+            return res.status(500).send({ error: err })
 
         }
     }
+    async updateBooks(req: Request, res: Response) {
+        const { id } = req.params;
+        const {
+            title,
+            authors,
+            description,
+            isbn,
+            publishing_company,
+            languages,
+            page_count,
+
+        } = req.body;
+        try {
+            const books = await booksService.updateBooks(
+                id,
+                title,
+                authors,
+                description,
+                isbn,
+                publishing_company,
+                languages,
+                page_count,
+            );
+
+            return res.status(200).send(books);
+        } catch (err) {
+            console.log(err)
+            return res.status(500).send({ error: err })
+
+        }
+    }
+
+    async deleteBooks(req: Request, res: Response) {
+        const { id } = req.params;
+
+        try {
+            const books = await booksService.deleteBooks(id)
+            return res.status(200).send(books);
+
+        } catch (err) {
+            return res.status(500).send({ error: err })
+
+        }
+    }
+
 
 }
 
