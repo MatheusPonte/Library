@@ -6,6 +6,8 @@ const booksController = new BooksController();
 
 route.get('/getAllBooks', booksController.listBooks);
 
+route.get('/ getBookById/:id', booksController.listBookById)
+
 route.post('/createBook', booksController.createBooks);
 
 route.put('/updateBook/:id', booksController.updateBooks);

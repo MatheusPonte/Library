@@ -1,10 +1,15 @@
 const booksRepository = require('../repository/BooksRepository');
 
 class BooksServices {
-    async listBooks() {
-        const books = await booksRepository.getAllBooks();
+    async listBooks(page:number) {
+        const books = await booksRepository.getAllBooks(page);
         return books;
     }
+
+    async listBookById(id: string){
+        const book = await booksRepository.getBookById(id);
+        return book;
+    };
 
     async createBooks(
         title: string,

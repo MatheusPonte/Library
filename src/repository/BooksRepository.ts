@@ -3,10 +3,21 @@ const { v4: uuidv4 } = require('uuid');
 
 const prisma = require('../database/prismaClient');
 
-const getAllBooks = async () => {
-    const books = await prisma.books.findMany();
+const getAllBooks = async (page:number) => {
+    const books = await prisma.books.findMany({
+        skip: (page - 1)* 5,
+        take: 5,
+
+    });
     return books;
 };
+
+const getBookById = async(id: string) =>{
+    const book = await prisma.books.findUnique({
+        where: {id}
+    });
+    return book;
+}
 
 const createBook = async (title: string, authors: string, description: string, isbn: string, publishing_company: string,
     languages: string, page_count: number) => {
@@ -61,12 +72,13 @@ const deleteBook = async (id: string) => {
 
     })
     return result;
-}
+};
 
 module.exports = {
     getAllBooks,
+    getBookById,
     createBook,
     updateBook,
-    deleteBook
+    deleteBook,
 
 };

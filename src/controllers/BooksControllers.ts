@@ -5,11 +5,23 @@ const booksService = new BooksService();
 
 class BooksController {
     async listBooks(req: Request, res: Response) {
+        const {page} = req.query;
         try {
-            const books = await booksService.listBooks();
+            const books = await booksService.listBooks(page);
             return res.status(200).send(books);
         } catch (err) {
+            console.log(err)
             return res.status(500).send({ error: err })
+        }
+    }
+
+    async listBookById(req:Request, res:Response){
+        const {id} = req.params;
+        try{
+            const book = await booksService.listBookById(id);
+            return res.status(200).send(book);
+        }catch(err){
+            return res.status(500).send({error: err})
         }
     }
 
