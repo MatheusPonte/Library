@@ -20,7 +20,7 @@ const getBookById = async(id: string) =>{
 }
 
 const createBook = async (title: string, authors: string, description: string, isbn: string, publishing_company: string,
-    languages: string, page_count: number) => {
+    languages: string, page_count: number, posted_by: string) => {
     const books = await prisma.books.create({
         data: {
             id: uuidv4(),
@@ -31,6 +31,7 @@ const createBook = async (title: string, authors: string, description: string, i
             publishing_company,
             languages,
             page_count,
+            posted_by,
 
         }
     });

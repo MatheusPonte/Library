@@ -19,6 +19,7 @@ class BooksServices {
         publishing_company: string,
         languages: string,
         page_count: number,
+        posted_by: string,
     ) {
         const books = await booksRepository.createBook(
             title,
@@ -28,6 +29,7 @@ class BooksServices {
             publishing_company,
             languages,
             page_count,
+            posted_by,
         );
         return books;
 

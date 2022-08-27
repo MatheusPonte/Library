@@ -8,12 +8,22 @@ datasource db {
 }
 
 model books {
-  id                 String  @id @map("_id") @db.VarChar(255)
-  title              String  @db.VarChar(255)
-  authors            String  @db.VarChar(255)
-  description        String? @db.VarChar(255)
-  isbn               String  @db.VarChar(255)
-  publishing_company String? @db.VarChar(255)
-  languages          String  @db.VarChar(255)
+  id                 String  @id @map("_id") @db.VarChar
+  title              String  @db.VarChar
+  authors            String  @db.VarChar
+  description        String? @db.VarChar
+  isbn               String  @db.VarChar
+  languages          String  @db.VarChar
+  publishing_company String? @db.VarChar
   page_count         Int
+  posted_by          String  @db.VarChar
+  users              users   @relation(fields: [posted_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id       String  @id @map("_id") @db.VarChar
+  nome     String  @db.VarChar
+  email    String  @db.VarChar @unique
+  password String  @map("_password") @db.VarChar
+  books    books[]
 }
