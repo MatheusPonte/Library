@@ -21,6 +21,18 @@ class UserService {
             password);
         return users;
     }
+
+    async updateUser(id: string, nome?: string, email?: string, password?:string){
+        const user = await usersRepository.updateUser(id, nome, email, password);
+        return user;
+    }
+
+    async deleteUser(id:string){
+        const user = await usersRepository.deleteUser(id);
+        return user;
+    }
 };
+
+
 
 module.exports = UserService;
